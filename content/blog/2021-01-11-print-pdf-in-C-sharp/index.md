@@ -10,7 +10,7 @@ cover:  cover.jpg
 
 最直接嘅方法係 Call Command，前題係 User 要有裝到 Adobe PDF Reader
 ```
-AcroRd32。exe \p <filename>
+AcroRd32.exe \p <filename>
 ```
 
 唔係就要 Send 個 Print command 出去等 System 自己 Call default 嘅 Print process
@@ -25,10 +25,10 @@ private void PrintPDF()
           Verb = "Print",
           UseShellExecute = true,
           CreateNoWindow = true,
-          WindowStyle = ProcessWindowStyle。Hidden
+          WindowStyle = ProcessWindowStyle.Hidden
       }
   };
-  printProcess。Start();
+  printProcess.Start();
 }
 ```
 
@@ -36,49 +36,49 @@ private void PrintPDF()
 
 本來都唔想搵 3rd Party Library，但個Reader成日唔Work最後都係要靠人地
 
-而我用嘅Library就係 `PDFium。Viewer`，係 `NuGet` 打就搵到架喇！
+而我用嘅Library就係 `PDFium.Viewer`，係 `NuGet` 打就搵到架喇！
 
 段 Code 大約係咁嘅:
 
 ```csharp
 public void Print(string filePath)
 {
-  System。Windows。Forms。PrintDialog printDialog = new System。Windows。Forms。PrintDialog();
+  System.Windows.Forms.PrintDialog printDialog = new System.Windows.Forms.PrintDialog();
 
-  using (PdfiumViewer。PdfDocument document = PdfDocument。Load(filePath))
+  using (PdfiumViewer.PdfDocument document = PdfDocument.Load(filePath))
   {
-    printDialog。AllowPrintToFile = true;
-    printDialog。AllowSomePages = true;
-    printDialog。PrinterSettings。MinimumPage = 1;
-    printDialog。PrinterSettings。MaximumPage = document。PageCount;
-    printDialog。PrinterSettings。FromPage = 1;
-    printDialog。PrinterSettings。ToPage = document。PageCount;
+    printDialog.AllowPrintToFile = true;
+    printDialog.AllowSomePages = true;
+    printDialog.PrinterSettings.MinimumPage = 1;
+    printDialog.PrinterSettings.MaximumPage = document.PageCount;
+    printDialog.PrinterSettings.FromPage = 1;
+    printDialog.PrinterSettings.ToPage = document.PageCount;
 
-    if (printDialog。ShowDialog() == System。Windows。Forms。DialogResult。OK)
+    if (printDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
     {
       try
       {
-        PageSettings pageSettings = new PageSettings(printDialog。PrinterSettings)
+        PageSettings pageSettings = new PageSettings(printDialog.PrinterSettings)
         {
           Margins = new Margins(0, 0, 0, 0),
-          PaperSize = printDialog。PrinterSettings。DefaultPageSettings。PaperSize
+          PaperSize = printDialog.PrinterSettings.DefaultPageSettings.PaperSize
         };
 
-        using (var printDocument = document。CreatePrintDocument())
+        using (var printDocument = document.CreatePrintDocument())
         {
-          printDocument。PrinterSettings = printDialog。PrinterSettings;
-          printDocument。DefaultPageSettings = pageSettings;
-          printDocument。PrintController = new StandardPrintController();
-          printDocument。Print();
+          printDocument.PrinterSettings = printDialog.PrinterSettings;
+          printDocument.DefaultPageSettings = pageSettings;
+          printDocument.PrintController = new StandardPrintController();
+          printDocument.Print();
         }
       }
       catch (Exception ex)
       {
-        System。Diagnostics。Debug。WriteLine(ex。ToString());
+        System.Diagnostics.Debug.WriteLine(ex.ToString());
       }
     }
   }
 }
 ```
 
-首先就彈一個 `PrintDialog` 出來比 User 揀佢想用嘅 Printer，頁數同埋份數，之後就會射番比 `PdfiumViewer` 個邊 Create 個 `PdfDocument`。 最後就經番 `PdfiumViewer` 根據 `PrintDialog。PrinterSettings` 去 Print 番份 PDF 出黎。 就係咁簡單！
+首先就彈一個 `PrintDialog` 出來比 User 揀佢想用嘅 Printer，頁數同埋份數，之後就會射番比 `PdfiumViewer` 個邊 Create 個 `PdfDocument`. 最後就經番 `PdfiumViewer` 根據 `PrintDialog.PrinterSettings` 去 Print 番份 PDF 出黎. 就係咁簡單！
