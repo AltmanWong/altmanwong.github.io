@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
+import '../../static/dark.css';
+
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
@@ -30,12 +32,7 @@ const BlogIndex = ({ data, location }) => {
                 <header>
                   <div>
                   <small>
-                  {
-                    node.frontmatter.hashtag?
-                    node.frontmatter.hashtag.split(',').map((item) => {
-                      return <Link style={{ color: 'deepOrange', margin: 2 }}>{item}</Link>
-                    }): ''
-                  }
+                    { createHashtagGroup(node.frontmatter.hashtag) }
                   </small>
                   </div>
                   <h3
@@ -68,12 +65,7 @@ const BlogIndex = ({ data, location }) => {
                 <header>
                   <div>
                   <small>
-                  {
-                    node.frontmatter.hashtag?
-                    node.frontmatter.hashtag.split(',').map((item) => {
-                      return <Link style={{ color: 'deepOrange', margin: 2 }}>{item}</Link>
-                    }): ''
-                  }
+                  { createHashtagGroup(node.frontmatter.hashtag) }
                   </small>
                   </div>
                   <h3
@@ -109,12 +101,7 @@ const BlogIndex = ({ data, location }) => {
                   <header>
                     <div>
                     <small>
-                    {
-                      node.frontmatter.hashtag?
-                      node.frontmatter.hashtag.split(',').map((item) => {
-                        return <Link style={{ color: 'deepOrange', margin: 2 }}>{item}</Link>
-                      }): ''
-                    }
+                    { createHashtagGroup(node.frontmatter.hashtag) }
                     </small>
                     </div>
                     <h3
@@ -145,6 +132,24 @@ const BlogIndex = ({ data, location }) => {
       </div>
     </Layout>
   )
+}
+
+const createHashtagGroup = (hasttags) => {
+  let tagToReturn = [];
+
+  if (hasttags) {
+    let listOfHashtags = hasttags.split(',');
+
+    for (let i = 0; i < listOfHashtags.length; i++) {
+      if (tagToReturn.length > 0) {
+        tagToReturn.push(<span>+</span>);
+      }
+
+      tagToReturn.push(<Link style={{ margin: 2, boxShadow: 'none'}} to={`hashtag/${listOfHashtags[i]}`}>{listOfHashtags[i]}</Link>);
+    }
+  }
+
+  return tagToReturn;
 }
 
 export default BlogIndex
