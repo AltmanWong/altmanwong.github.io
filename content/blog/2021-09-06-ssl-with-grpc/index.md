@@ -3,7 +3,7 @@ title: gRPC SSL 全記錄
 date: "2021-09-06T13:28:03.284Z"
 description:
 hashtag: C#,gRPC,NGINX,技術隨筆
-cover:  cover.png
+cover:  cover.jpg
 ---
 
 近來工作上用到 `gRPC` 需要起一隻 `gRPC Server` 夾 `NGINX` 做 `LOAD BALANCING` 搞到頭都大先整得好 特此記錄一下

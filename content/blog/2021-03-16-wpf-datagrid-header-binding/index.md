@@ -3,7 +3,7 @@ title: WPF DataGrid Header Binding
 date: "2021-03-16T13:28:03.284Z"
 description:
 hashtag: C#,技術隨筆
-cover:  cover.png
+cover:  cover.jpg
 ---
 
 ```xml
