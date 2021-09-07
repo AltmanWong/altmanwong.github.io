@@ -3,7 +3,7 @@ title: Postgres x Redis x Docker 起機懶人包
 date: "2020-11-27T13:28:03.284Z"
 description:
 hashtag: Redis,Postgres,Docker,技術隨筆
-cover:  cover.jpg
+cover:  cover.png
 ---
 
 ```yaml

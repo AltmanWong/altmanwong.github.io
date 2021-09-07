@@ -3,7 +3,7 @@ title: Redis 學習筆記
 date: "2020-11-19T13:28:03.284Z"
 description:
 hashtag: Redis,技術隨筆
-cover:  cover.jpg
+cover:  cover.png
 ---
 
 以下內容為本人上網左抄右抄嘅
