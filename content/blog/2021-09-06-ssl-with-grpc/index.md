@@ -5,6 +5,7 @@ description:
 hashtag: C#,gRPC,NGINX,技術隨筆
 cover:  cover.jpg
 ---
+![gRPC + NGINX](./cover.jpg)
 
 近來工作上用到 `gRPC` 需要起一隻 `gRPC Server` 夾 `NGINX` 做 `LOAD BALANCING` 搞到頭都大先整得好 特此記錄一下
 
